@@ -8,4 +8,13 @@ public class Farmer : Worker
     {
         base.DoWork();
     }
+
+    public override void Walk(Resource target)
+    {
+        if (target._type == ResourceType.FoodField)
+        {
+            SetResource(target);
+        }
+
+    }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// This script handle all the control code, so detecting when the users click on a unit or building and selecting those
@@ -12,13 +13,19 @@ public class UserControl : MonoBehaviour
     public Camera GameCamera;
     public float PanSpeed = 10.0f;
     public GameObject Marker;
+    public Text _objectText;
+    public Text _descriptionText;
 
     private Worker _worker = null;
     private Resource _resource = null;
 
+    
+
     private void Start()
     {
         Marker.SetActive(false);
+        _objectText.text = "";
+        _descriptionText.text = "";
     }
 
     public void HandleSelection()
@@ -40,6 +47,22 @@ public class UserControl : MonoBehaviour
             //var uiInfo = hit.collider.GetComponentInParent<UIMainScene.IUIInfoContent>();
             //UIMainScene.Instance.SetNewInfoContent(uiInfo);
         }
+
+        if (_worker!=null)
+        {
+            _objectText.text = _worker._name;
+            _descriptionText.text = _worker._description;
+        }
+        else if (_resource != null)
+        {
+            _objectText.text = _resource._name;
+            _descriptionText.text = _resource._description;
+        }
+        else
+        {
+            _objectText.text = "";
+            _descriptionText.text = "";
+        }
     }
 
     public void HandleAction()
@@ -51,19 +74,19 @@ public class UserControl : MonoBehaviour
         {
             if (_worker != null)
             {
-                _worker.Walk(hit.point);
+                var resource = hit.collider.GetComponentInParent<Resource>();
+
+                if (resource != null)
+                {
+                    _worker.Walk(resource);
+                }
+                else
+                {
+                    _worker.Walk(hit.point);
+                }
             }
             
-            /*var resource = hit.collider.GetComponentInParent<Resource>();
-
-            if (resource != null)
-            {
-                m_Selected.Walk(resource);
-            }
-            else
-            {
-                m_Selected.Walk(hit.point);
-            }*/
+            
         }
     }
 

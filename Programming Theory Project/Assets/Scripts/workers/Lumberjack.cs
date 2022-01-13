@@ -9,4 +9,13 @@ public class Lumberjack : Worker
     {
         base.DoWork();
     }
+
+    public override void Walk(Resource target)
+    {
+        if (target._type == ResourceType.Tree)
+        {
+            SetResource(target);
+        }
+
+    }
 }

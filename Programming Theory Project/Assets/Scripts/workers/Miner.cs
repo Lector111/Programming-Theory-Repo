@@ -8,4 +8,13 @@ public class Miner : Worker
     {
         base.DoWork();
     }
+
+    public override void Walk(Resource target)
+    {
+        if(target._type==ResourceType.Metal || target._type == ResourceType.Rocks)
+        {
+            SetResource(target);
+        }
+        
+    }
 }
