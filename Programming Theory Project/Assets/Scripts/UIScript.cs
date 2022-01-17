@@ -20,10 +20,10 @@ public class UIScript : MonoBehaviour
 
     public void Update()
     {
-        _metalText.text = $"Metal:   {Math.Round(_metal,2)}";
-        _rocksText.text = $"Rocks:  {Math.Round(_rocks, 2)}";
-        _foodText.text = $"Food:    {Math.Round(_food, 2)}";
-        _woodText.text = $"Wood:   {Math.Round(_wood, 2)}";
+        _metalText.text = $"Metal:   {Math.Round(_metal,0)}";
+        _rocksText.text = $"Rocks:  {Math.Round(_rocks, 0)}";
+        _foodText.text = $"Food:    {Math.Round(_food, 0)}";
+        _woodText.text = $"Wood:   {Math.Round(_wood, 0)}";
     }
 
     public void MenuStartApp()
