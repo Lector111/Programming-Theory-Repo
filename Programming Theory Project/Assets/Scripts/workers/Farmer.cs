@@ -15,6 +15,9 @@ public class Farmer : Worker
         {
             SetResource(target);
         }
-
+        else
+        {
+            ShowText();
+        }
     }
 }

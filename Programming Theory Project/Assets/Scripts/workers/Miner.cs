@@ -15,6 +15,10 @@ public class Miner : Worker
         {
             SetResource(target);
         }
+        else
+        {
+            ShowText();
+        }
         
     }
 }

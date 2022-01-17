@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public abstract class Worker : MonoBehaviour
 {
@@ -10,9 +13,18 @@ public abstract class Worker : MonoBehaviour
     public int _gatherPerSecond = 10;
 
     public float Speed = 3;
+
+    public Text _speachTextUI;
+    public string _speachText;
     
     protected NavMeshAgent m_Agent;
     private Resource _target;
+
+    public void Start()
+    {
+        _speachTextUI.text = _speachText;
+        _speachTextUI.gameObject.SetActive(false);
+    }
 
     public void SetResource(Resource res)
     {
@@ -68,6 +80,31 @@ public abstract class Worker : MonoBehaviour
                 m_Agent.isStopped = true;
                 UIScript.CountResource(_target._type, _gatherPerSecond);
             }
+        }
+        Vector3 offset = new Vector3(0f, 0.6f, 0f);
+        Vector3 textPos = Camera.main.WorldToScreenPoint(this.transform.position + offset);
+        _speachTextUI.transform.position = textPos;
+        if (_speachTextUI.IsActive())
+        {
+            if (_secondsToHideText > 0)
+            {
+                _secondsToHideText -= Time.deltaTime;
+            }
+            else
+            {
+                _speachTextUI.gameObject.SetActive(false);
+            }
+        }
+        
+    }
+
+    private float _secondsToHideText = 0;
+    public void ShowText()
+    {
+        if (!_speachTextUI.IsActive())
+        {
+            _speachTextUI.gameObject.SetActive(true);
+            _secondsToHideText = 3;
         }
     }
 }

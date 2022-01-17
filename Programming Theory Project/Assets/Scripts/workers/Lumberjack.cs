@@ -16,6 +16,9 @@ public class Lumberjack : Worker
         {
             SetResource(target);
         }
-
+        else
+        {
+            ShowText();
+        }
     }
 }
