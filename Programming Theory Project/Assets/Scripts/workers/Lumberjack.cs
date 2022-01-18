@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lumberjack : Worker
+public class Lumberjack : Worker // INHERITANCE
 {
     
     public override void DoWork()
@@ -10,7 +10,7 @@ public class Lumberjack : Worker
         base.DoWork();
     }
 
-    public override void Walk(Resource target)
+    public override void Walk(Resource target) // POLYMORPHISM
     {
         if (target._type == ResourceType.Tree)
         {
